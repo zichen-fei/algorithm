@@ -26,8 +26,7 @@ public class BuildTree {
         TreeNode treeNode = b.buildTree(pre, in);
 //        TreeNode treeNode = b.buildTree(pre, in, Integer.MAX_VALUE);
 //        b.lastOrder(treeNode);
-        Utils utils = new Utils();
-        utils.show(treeNode);
+        Utils.show(treeNode);
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {

@@ -1,9 +1,63 @@
 package com.feizc;
 
+import java.util.Random;
+
 class Utils {
 
+    //生成单链表
+    static ListNode createLinkList(int length, int bound) {
+        Random random = new Random();
+        //头插法
+        ListNode head = new ListNode(random.nextInt(bound));
+        ListNode curr = new ListNode(random.nextInt(bound));
+        if (length == 1) {
+            return head;
+        } else {
+            head.next = curr;
+        }
+        for (int i = 2; i < length; i++) {
+            ListNode node = new ListNode(random.nextInt(bound));
+            head.next = node;
+            node.next = curr;
+            curr = node;
+        }
+
+
+        //尾插法
+//        ListNode head = new ListNode(random.nextInt(bound));
+//        if (length == 1) {
+//            return head;
+//        }
+//        ListNode curr = head;
+//        for (int i = 1; i < length; i++) {
+//            ListNode node = new ListNode(random.nextInt(bound));
+//            curr.next = node;
+//            curr = node;
+//        }
+        return head;
+    }
+
+    //打印链表
+    static void printListNode(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + "\t");
+            head = head.next;
+        }
+        System.out.println();
+    }
+
+    //生成数组
+    static int[] createArray(int length, int bound) {
+        Random random = new Random();
+        int[] nums = new int[length];
+        for (int i = 0; i < length; i++) {
+            nums[i] = random.nextInt(bound);
+        }
+        return nums;
+    }
+
     //打印树结构
-    void show(BuildTree.TreeNode root) {
+    static void show(BuildTree.TreeNode root) {
         if (root == null) {
             System.out.println("EMPTY!");
         }
@@ -40,12 +94,12 @@ class Utils {
     }
 
     // 用于获得树的层数
-    private int getTreeDepth(BuildTree.TreeNode root) {
+    private static int getTreeDepth(BuildTree.TreeNode root) {
         return root == null ? 0 : (1 + Math.max(getTreeDepth(root.left), getTreeDepth(root.right)));
     }
 
 
-    private void writeArray(BuildTree.TreeNode currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
+    private static void writeArray(BuildTree.TreeNode currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
         if (currNode == null) {
             return;
         }
