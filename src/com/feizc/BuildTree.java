@@ -1,5 +1,8 @@
 package com.feizc;
 
+import com.feizc.common.TreeNode;
+import com.feizc.common.Utils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,15 +81,5 @@ public class BuildTree {
         root.left = buildTree(preorder, inorder, val);
         root.right = buildTree(preorder, inorder, leafNodeVal);
         return root;
-    }
-
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
     }
 }

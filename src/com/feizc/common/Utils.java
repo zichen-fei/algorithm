@@ -1,44 +1,69 @@
-package com.feizc;
+package com.feizc.common;
 
 import java.util.Random;
 
-class Utils {
+public class Utils {
+
+    public enum Order {
+        NULL,
+        DESC,
+        ASC
+    }
 
     //生成单链表
-    static ListNode createLinkList(int length, int bound) {
+    public static ListNode createLinkList(int length, int bound, Order order) {
         Random random = new Random();
         //头插法
         ListNode head = new ListNode(random.nextInt(bound));
-        ListNode curr = new ListNode(random.nextInt(bound));
-        if (length == 1) {
-            return head;
-        } else {
-            head.next = curr;
-        }
-        for (int i = 2; i < length; i++) {
-            ListNode node = new ListNode(random.nextInt(bound));
-            head.next = node;
-            node.next = curr;
-            curr = node;
+        boolean flag = false;
+        ListNode node;
+        for (int i = 0; i < length; i++) {
+            int val = random.nextInt(bound);
+            if (!order.equals(Order.NULL)) {
+                flag = true;
+            }
+            while (flag) {
+                if (order.equals(Order.ASC) && head.val >= val) {
+                    flag = false;
+                } else if (order.equals(Order.DESC) && head.val <= val) {
+                    flag = false;
+                } else {
+                    val = random.nextInt(bound);
+                }
+            }
+            node = new ListNode(val);
+            node.next = head;
+            head = node;
         }
 
 
         //尾插法
 //        ListNode head = new ListNode(random.nextInt(bound));
-//        if (length == 1) {
-//            return head;
-//        }
+//        boolean flag = false;
 //        ListNode curr = head;
-//        for (int i = 1; i < length; i++) {
-//            ListNode node = new ListNode(random.nextInt(bound));
+//        ListNode node;
+//        for (int i = 0; i < length; i++) {
+//            int val = random.nextInt(bound);
+//            if (!order.equals(Order.NULL)) {
+//                flag = true;
+//            }
+//            while (flag) {
+//                if ((order.equals(Order.ASC) && head.val >= val)
+//                        || (order.equals(Order.DESC) && head.val <= val)) {
+//                    flag = false;
+//                } else {
+//                    val = random.nextInt(bound);
+//                }
+//            }
+//            node = new ListNode(val);
 //            curr.next = node;
 //            curr = node;
 //        }
-        return head;
+        return head.next;
     }
 
     //打印链表
-    static void printListNode(ListNode head) {
+    public static void printListNode(ListNode head) {
         while (head != null) {
             System.out.print(head.val + "\t");
             head = head.next;
@@ -47,17 +72,45 @@ class Utils {
     }
 
     //生成数组
-    static int[] createArray(int length, int bound) {
+    public static int[] createArray(int length, int bound) {
         Random random = new Random();
         int[] nums = new int[length];
         for (int i = 0; i < length; i++) {
-            nums[i] = random.nextInt(bound);
+            int a = random.nextInt(bound);
+            nums[i] = a;
         }
         return nums;
     }
 
+    //打印数组
+    public static void printArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + "\t");
+        }
+    }
+
+    //生成二维数组
+    public static int[][] createTwoDimArray(int rowLength, int colLength, int bound) {
+        int[][] nums = new int[rowLength][colLength];
+        for (int i = 0; i < rowLength; i++) {
+            int[] array = createArray(colLength, bound);
+            nums[i] = array;
+        }
+        return nums;
+    }
+
+    //打印二维数组
+    public static void printTwoDimArray(int[][] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                System.out.print(array[i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+
     //打印树结构
-    static void show(BuildTree.TreeNode root) {
+    public static void show(TreeNode root) {
         if (root == null) {
             System.out.println("EMPTY!");
         }
@@ -94,12 +147,12 @@ class Utils {
     }
 
     // 用于获得树的层数
-    private static int getTreeDepth(BuildTree.TreeNode root) {
+    private static int getTreeDepth(TreeNode root) {
         return root == null ? 0 : (1 + Math.max(getTreeDepth(root.left), getTreeDepth(root.right)));
     }
 
 
-    private static void writeArray(BuildTree.TreeNode currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
+    private static void writeArray(TreeNode currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) {
         if (currNode == null) {
             return;
         }

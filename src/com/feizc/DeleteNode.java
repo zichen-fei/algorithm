@@ -1,5 +1,8 @@
 package com.feizc;
 
+import com.feizc.common.ListNode;
+import com.feizc.common.Utils;
+
 /**
  * 给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
  * 返回删除后的链表的头节点。
@@ -10,7 +13,7 @@ package com.feizc;
 public class DeleteNode {
 
     public static void main(String[] args) {
-        ListNode head = Utils.createLinkList(2, 10);
+        ListNode head = Utils.createLinkList(4, 10, Utils.Order.NULL);
 
         DeleteNode d = new DeleteNode();
         Utils.printListNode(head);
