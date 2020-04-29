@@ -1,5 +1,7 @@
 package com.feizc;
 
+import com.feizc.common.ListNode;
+
 import java.util.Stack;
 
 /**
@@ -29,14 +31,5 @@ public class ReversePrint {
             i++;
         }
         return arr;
-    }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
     }
 }
