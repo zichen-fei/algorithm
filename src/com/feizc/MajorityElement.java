@@ -1,10 +1,10 @@
 package com.feizc;
 
 /**
- 数组中出现次数超过一半的数字
-
- 输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]
- 输出: 2
+ * 数组中出现次数超过一半的数字
+ * <p>
+ * 输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]
+ * 输出: 2
  */
 public class MajorityElement {
     public static void main(String[] args) {
@@ -15,21 +15,19 @@ public class MajorityElement {
     }
 
     public int majorityElement(int[] nums) {
-        if (nums == null) {
-            return 0;
-        }
-        int result = 0;
-        int times = 1;
-        for (int i = 0; i < nums.length; i++) {
-            if (times == 0) {
-                result = nums[i];
-                times = 1;
-            } else if (nums[i] == result){
-                times++;
+        int target = nums[0];
+        int count = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (target == nums[i]) {
+                count++;
             } else {
-                times--;
+                count--;
+            }
+            if (count == 0) {
+                target = nums[i];
+                count = 1;
             }
         }
-        return result;
+        return target;
     }
 }
